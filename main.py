@@ -1,9 +1,40 @@
+import sys
 import random
+import pandas as pd
 from databaze import Databaze
 from priklad import Priklad
+from zak import Zak
 
 databaze = Databaze("priklady1.txt")
 format = [3]
+
+def co_dal():
+    co = input("Znovu?:1/konec?:2")
+    if co == str(1) :
+        main(format)
+    if co == str(2) :
+        print("sbohem")
+        sys.exit(2)
+    if co != str(1) and co != str(2):
+        co_dal()
+    
+
+def handler():
+    udaje=[]
+    zaci = pd.read_excel("zaci.xlsx")
+    st = input("Zadejte sve st:")
+    if st not in zaci.columns:
+        udaje.append(input("zadej sve jmeno:"))
+        udaje.append(input("zadej sve prijmeni:"))
+        udaje.append([])
+        zaci[st] = udaje
+        zaci.to_excel("zaci.xlsx",index = False)
+    zak = Zak(st,"zaci.xlsx")
+    return zak  
+
+def reset_zaci(soubor):
+    d = pd.DataFrame([],[])
+    d.to_excel(soubor, index = False)
 
 def vytvor_priklad(typ):
     
@@ -61,10 +92,19 @@ def oznamkuj(body,testik):
         znamka = 3
     if procenta < 55 and procenta >= 40:
         znamka = 4
-    else:
+    if procenta <40:
         znamka = 5
     print(f"Test jsi splnil na {procenta} procent a dostal jsi {znamka}")
 
+def main(format):
+    handler()
+    testik = vytvor_test(format)
+    oznamkuj(spust_test(testik),testik)
+    co_dal()
+    
+#if __name__ == "__main__":
+    #main(format)
 
+#reset_zaci("zaci.xlsx")
 #testik = vytvor_test(format)
 #oznamkuj(spust_test(testik),testik)
