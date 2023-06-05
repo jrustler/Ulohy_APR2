@@ -20,7 +20,7 @@ class Databaze:
 
 
     @typ1.setter
-    def soubor(self, value):
+    def typ1(self, value):
         self._typ1 = value
     
     @property 
@@ -29,7 +29,7 @@ class Databaze:
 
 
     @typ2.setter
-    def soubor(self, value):
+    def typ2(self, value):
         self._typ2 = value
     
     @property 
@@ -38,7 +38,7 @@ class Databaze:
 
 
     @typ3.setter
-    def soubor(self, value):
+    def typ3(self, value):
         self._typ3 = value
     
 
