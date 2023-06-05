@@ -40,5 +40,3 @@ class Priklad:
         else:
             self.uspesnost = "špatně"
         print(self.uspesnost)
-p=Priklad("kolik je 5*5?",25)
-p.vypis_a_zkontroluj()

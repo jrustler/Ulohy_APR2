@@ -41,5 +41,4 @@ class Databaze:
     def soubor(self, value):
         self._typ3 = value
     
-a=Databaze("priklady1.txt")
-print(a.typ1,a.typ2,a.typ3)
+
