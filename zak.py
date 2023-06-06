@@ -43,6 +43,11 @@ class Zak:
     
     def vypis_znamky(self):
         print(f"tve znamky jsou: {self.df[self.st][2]}")
+    
+    def vypis_prumer(self):
+        seznam =[int(i) for i in self.df[self.st][2].split(", ")]
+        prumer = sum(seznam)/len(seznam)
+        print(f"tvůj průměr je {prumer}")
 
     def pridej_znamku(self,znamka):
         if self.df[self.st][2]=="0":

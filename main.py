@@ -17,6 +17,7 @@ def co_dal(zak):
         sys.exit(2)
     if co == str(3):
         zak.vypis_znamky()
+        zak.vypis_prumer()
         co_dal(zak)
     if co != str(1) and co != str(2) and co != str(3):
         co_dal(zak)
@@ -71,7 +72,7 @@ def vytvor_typ2():
     a = random.randint(1,10)
     k1 = random.randint(-10,10)
     k2 = random.randint(-10,10)
-    b = -a*(k1 + k2)
+    b = a*(-k1 + -k2)
     c = a*k1*k2
     zadani = zadani.replace("$a",str(a))
     if b > 0:
@@ -91,7 +92,7 @@ def vytvor_typ2():
         vysledek =str(k1)+","+str(k2)
     else:
         vysledek =str(k2)+","+str(k1)
-    
+    print(vysledek)
     p2 = Priklad(zadani,vysledek)
     
     return p2
@@ -128,7 +129,7 @@ def oznamkuj(body,testik,zak):
     print(f"Test jsi splnil na {procenta} procent a dostal jsi {znamka}")
     return zak
 def main(format):
-    reset_zaci("zaci.xlsx")
+    #reset_zaci("zaci.xlsx")
     zak = handler()
     testik = vytvor_test(format)
     zak = oznamkuj(spust_test(testik),testik,zak)
