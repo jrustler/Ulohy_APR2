@@ -112,6 +112,30 @@ def vytvor_typ2(databaze):
     p2 = Priklad(zadani,vysledek)
     
     return p2
+def vytvor_typ3(databaze):
+    zadani = random.choice(databaze.typ3)
+    m = random.choice([30000,10000,4000,5000,50000,60000,80000])
+    cm = random.randint(1,9)
+    j = random.choice(["cm","m","km"])
+    km = random.randint(1,9)
+    zadani = zadani.replace("$m",str(m))
+    if zadani.count("$cm") != 0:
+        zadani = zadani.replace("$cm",str(cm))
+        zadani = zadani.replace("$j",str(j))
+        if j == "cm":
+            vysledek=str(round((cm*m),1)).replace(".0","")
+        if j == "m":
+            vysledek=str(round(cm*(m/100),1)).replace(".0","")
+        if j == "km":
+            vysledek = str(round(cm*(m/100000),1)).replace(".0","")
+    else:
+        zadani = zadani.replace("$km",str(km))
+        vysledek = str(round((km/m)*100000,1)).replace(".0","")
+    print(vysledek)
+    p3 = Priklad(zadani,vysledek)
+    return p3
+
+
 
 def vytvor_test(format,databaze):
     test = []
@@ -119,6 +143,8 @@ def vytvor_test(format,databaze):
         test.append(vytvor_typ1(databaze))
     for i in range(format[1]):
         test.append(vytvor_typ2(databaze))
+    for i in range(format[2]):
+        test.append(vytvor_typ3(databaze))
     return test
 
 def spust_test(test):
@@ -148,7 +174,7 @@ def main():
     #reset_zaci("zaci.xlsx")
     data = input("nazev souboru s predlohami prikladu")
     soubor = input("kam ukladat data o zacich? (xlsx)")
-    jak = input("kolik prikladu jakeho typu? typ1,typ2")
+    jak = input("kolik prikladu jakeho typu? typ1,typ2,typ3")
     format = [int(i) for i in jak.split(",")]
     databaze = Databaze(data)
     kdo = input("Jsi ucitel nebo zak? (u/z)")
@@ -164,6 +190,3 @@ def main():
 if __name__ == "__main__":
     main()
 
-#reset_zaci("zaci.xlsx")
-#testik = vytvor_test(format)
-#oznamkuj(spust_test(testik),testik)
