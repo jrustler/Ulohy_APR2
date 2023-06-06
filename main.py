@@ -130,7 +130,6 @@ def vytvor_typ3(databaze):
     else:
         zadani = zadani.replace("$km",str(km))
         vysledek = str(round((km/m)*100000,1)).replace(".0","")
-    print(vysledek)
     p3 = Priklad(zadani,vysledek)
     return p3
 
