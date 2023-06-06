@@ -1,3 +1,3 @@
 1-kolik je $c $o $c?
-2-
+2-$ax**2 $bx $c = 0
 3-zderivujte $f

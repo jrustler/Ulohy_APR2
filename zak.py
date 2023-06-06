@@ -4,10 +4,8 @@ class Zak:
 
     def __init__(self,st,soubor):
         self._st = st
-        self._soubor = pd.read_excel("zaci.xlsx")
-        self._jmeno = self._soubor[st][0]
-        self._prijmeni = self._soubor[st][1]
-        self._znamky = self._soubor[st][2]
+        self._soubor = soubor
+        self._df = pd.read_excel(soubor)
      
     @property 
     def st(self):
@@ -27,30 +25,28 @@ class Zak:
     def soubor(self, value):
         self._soubor = value
     
-    @property 
-    def jmeno(self):
-        return self._jmeno
-
-
-    @jmeno.setter
-    def jmeno(self, value):
-        self._jmeno = value
     
     @property 
-    def prijmeni(self):
-        return self._prijmeni
+    def df(self):
+        return self._df
 
 
-    @prijmeni.setter
-    def prijmeni(self, value):
-        self._prijmeni = value
+    @df.setter
+    def df(self, value):
+        self._df = value
     
-    @property 
-    def znamky(self):
-        return self._znamky
+    def vypis_jmeno(self):
+        print(self.df[self.st][0])
+    
+    def vypis_prijmeni(self):
+        print(self.df[self.st][1])
+    
+    def vypis_znamky(self):
+        print(f"tve znamky jsou: {self.df[self.st][2]}")
 
-
-    @znamky.setter
-    def znamky(self, value):
-        self._znamky = value
-
+    def pridej_znamku(self,znamka):
+        if self.df[self.st][2]=="0":
+            self.df[self.st][2] = str(znamka)
+        else:
+            self.df[self.st][2]+=", "+str(znamka)
+        self.df.to_excel(self.soubor,index = False)

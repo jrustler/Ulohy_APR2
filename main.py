@@ -6,27 +6,28 @@ from priklad import Priklad
 from zak import Zak
 
 databaze = Databaze("priklady1.txt")
-format = [3]
+format = [1,2]
 
-def co_dal():
-    co = input("Znovu?:1/konec?:2")
+def co_dal(zak):
+    co = input("Znovu?:1/konec?:2/me znamky:3")
     if co == str(1) :
         main(format)
     if co == str(2) :
         print("sbohem")
         sys.exit(2)
-    if co != str(1) and co != str(2):
-        co_dal()
+    if co == str(3):
+        zak.vypis_znamky()
+    if co != str(1) and co != str(2) and co != str(3):
+        co_dal(zak)
     
 
 def handler():
-    udaje=[]
+    udaje=[0,0,"0"]
     zaci = pd.read_excel("zaci.xlsx")
     st = input("Zadejte sve st:")
     if st not in zaci.columns:
-        udaje.append(input("zadej sve jmeno:"))
-        udaje.append(input("zadej sve prijmeni:"))
-        udaje.append([])
+        udaje[0]=input("zadej sve jmeno:")
+        udaje[1]=input("zadej sve prijmeni:")
         zaci[st] = udaje
         zaci.to_excel("zaci.xlsx",index = False)
     zak = Zak(st,"zaci.xlsx")
@@ -63,6 +64,34 @@ def vytvor_priklad(typ):
                 pocty+=operatory[0]
         
         vysledek = eval(pocty)
+    if typ == 2:
+        zadani = random.choice(databaze.typ2)
+        a = random.randint(1,10)
+        k1 = random.randint(-10,10)
+        k2 = random.randint(-10,10)
+        b = -a*(k1 + k2)
+        c = a*k1*k2
+        zadani = zadani.replace("$a",str(a))
+        if b > 0:
+            zadani = zadani.replace("$b","+"+str(b))
+        if b < 0 :
+            zadani = zadani.replace("$b",str(b))
+        if b == 0:
+            zadani = zadani.replace("$bx"," ")
+        if c > 0:
+            zadani = zadani.replace("$c","+"+str(c))
+        if c < 0:
+            zadani = zadani.replace("$c",str(c))
+        if c == 0:
+            zadani = zadani.replace("$c","")
+        vysledek =str(k1)+","+str(k2)
+        print(vysledek)
+    
+        
+
+
+        
+        
     
     p1 = Priklad(zadani,vysledek)
     
@@ -72,6 +101,8 @@ def vytvor_test(format):
     test = []
     for i in range(format[0]):
         test.append(vytvor_priklad(1))
+    for i in range(format[1]):
+        test.append(vytvor_priklad(2))
     return test
 
 def spust_test(test):
@@ -81,7 +112,7 @@ def spust_test(test):
         if p.uspesnost == "správně":
             body+=1
     return body
-def oznamkuj(body,testik):
+def oznamkuj(body,testik,zak):
     max_body = len(testik)
     procenta = (body/max_body)*100
     if procenta >=85:
@@ -94,16 +125,18 @@ def oznamkuj(body,testik):
         znamka = 4
     if procenta <40:
         znamka = 5
+    zak.pridej_znamku(znamka)
     print(f"Test jsi splnil na {procenta} procent a dostal jsi {znamka}")
-
+    return zak
 def main(format):
-    handler()
+    reset_zaci("zaci.xlsx")
+    zak = handler()
     testik = vytvor_test(format)
-    oznamkuj(spust_test(testik),testik)
-    co_dal()
+    zak = oznamkuj(spust_test(testik),testik,zak)
+    co_dal(zak)
     
-#if __name__ == "__main__":
-    #main(format)
+if __name__ == "__main__":
+    main(format)
 
 #reset_zaci("zaci.xlsx")
 #testik = vytvor_test(format)
