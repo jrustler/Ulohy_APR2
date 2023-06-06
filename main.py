@@ -87,7 +87,10 @@ def vytvor_typ2():
     if c == 0:
         zadani = zadani.replace("$c","")
     
-    vysledek =str(k1)+","+str(k2)
+    if k1>k2:
+        vysledek =str(k1)+","+str(k2)
+    else:
+        vysledek =str(k2)+","+str(k1)
     
     p2 = Priklad(zadani,vysledek)
     
