@@ -6,7 +6,10 @@ from priklad import Priklad
 from zak import Zak
 
 
-
+def vysledky_zaku(soubor):
+    df = pd.read_excel(soubor)
+    for c in df:
+        print(df[c][0]+" "+df[c][1]+" : "+df[c][2])
 
 def co_dal(zak):
     co = input("Znovu?:1/konec?:2/me znamky:3")
@@ -25,7 +28,7 @@ def co_dal(zak):
 def co_dal_u(soubor):
     co = input("zaci s vysledky:1/konec:2/vymazat data zaku:3/restart:4")
     if co == str(1):
-        # dodelam
+        vysledky_zaku(soubor)
         co_dal_u(soubor)
     if co == str(2):
         print("sbohem")
