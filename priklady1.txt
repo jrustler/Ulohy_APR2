@@ -1,3 +1,6 @@
 1-kolik je $c $o $c?
 2-$ax**2 $bx $c = 0 , vysledek zadej ve tvaru k1,k2 , kde k1>=k2
 3-Turisticky klub si naplanoval cestu, ktera na mape v meritku 1:$m merila $cm cm, kolik $j merila ve skutecnosti?
+3-Pepik bydli $km km od skoly, kolik cm je to na mape v meritku 1:$m ?
+2-vypoctete kvadratickou rovnici, jejiz kvadraticky clen je $a , linearni clen je $b a absolutni clen je $c (vysledek napiste ve tvaru k1,k2, kde k1>=k2)
+1- Spoctete $c $o $c

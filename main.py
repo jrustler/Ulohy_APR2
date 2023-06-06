@@ -5,7 +5,6 @@ from databaze import Databaze
 from priklad import Priklad
 from zak import Zak
 
-
 def vysledky_zaku(soubor):
     df = pd.read_excel(soubor)
     for c in df:
