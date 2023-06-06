@@ -17,6 +17,7 @@ def co_dal(zak):
         sys.exit(2)
     if co == str(3):
         zak.vypis_znamky()
+        co_dal(zak)
     if co != str(1) and co != str(2) and co != str(3):
         co_dal(zak)
     
@@ -37,72 +38,67 @@ def reset_zaci(soubor):
     d = pd.DataFrame([],[])
     d.to_excel(soubor, index = False)
 
-def vytvor_priklad(typ):
+def vytvor_typ1():
     
-    if typ == 1:
-        zadani = random.choice(databaze.typ1)
-        cisla = []
-        operatory = []
-        kolik_cisel = zadani.count("$c")
-        kolik_operatoru = zadani.count("$o")
+    zadani = random.choice(databaze.typ1)
+    cisla = []
+    operatory = []
+    kolik_cisel = zadani.count("$c")
+    kolik_operatoru = zadani.count("$o")
         
-        for i in range(kolik_cisel):
-            c = random.randint(1,100)
-            cisla.append(c)
-            zadani = zadani.replace("$c",str(c),1)
+    for i in range(kolik_cisel):
+        c = random.randint(1,100)
+        cisla.append(c)
+        zadani = zadani.replace("$c",str(c),1)
         
-        for i in range(kolik_operatoru):
-            o = random.choice(["+","-","*","/"])
-            operatory.append(o)
-            zadani = zadani.replace("$o",o,1)
-        pocty = ""
+    for i in range(kolik_operatoru):
+        o = random.choice(["+","-","*"])
+        operatory.append(o)
+        zadani = zadani.replace("$o",o,1)
+    pocty = ""
         
-        for i in range(len(cisla)):
-            pocty+=str(cisla[i])
+    for i in range(len(cisla)):
+        pocty+=str(cisla[i])
             
-            if i <= (len(operatory)-1):
-                pocty+=operatory[0]
+        if i <= (len(operatory)-1):
+            pocty+=operatory[0]
         
-        vysledek = eval(pocty)
-    if typ == 2:
-        zadani = random.choice(databaze.typ2)
-        a = random.randint(1,10)
-        k1 = random.randint(-10,10)
-        k2 = random.randint(-10,10)
-        b = -a*(k1 + k2)
-        c = a*k1*k2
-        zadani = zadani.replace("$a",str(a))
-        if b > 0:
-            zadani = zadani.replace("$b","+"+str(b))
-        if b < 0 :
-            zadani = zadani.replace("$b",str(b))
-        if b == 0:
-            zadani = zadani.replace("$bx"," ")
-        if c > 0:
-            zadani = zadani.replace("$c","+"+str(c))
-        if c < 0:
-            zadani = zadani.replace("$c",str(c))
-        if c == 0:
-            zadani = zadani.replace("$c","")
-        vysledek =str(k1)+","+str(k2)
-        print(vysledek)
-    
-        
-
-
-        
-        
-    
+    vysledek = eval(pocty)
     p1 = Priklad(zadani,vysledek)
-    
     return p1
+def vytvor_typ2():
+    zadani = random.choice(databaze.typ2)
+    a = random.randint(1,10)
+    k1 = random.randint(-10,10)
+    k2 = random.randint(-10,10)
+    b = -a*(k1 + k2)
+    c = a*k1*k2
+    zadani = zadani.replace("$a",str(a))
+    if b > 0:
+        zadani = zadani.replace("$b","+"+str(b))
+    if b < 0 :
+        zadani = zadani.replace("$b",str(b))
+    if b == 0:
+        zadani = zadani.replace("$bx"," ")
+    if c > 0:
+        zadani = zadani.replace("$c","+"+str(c))
+    if c < 0:
+        zadani = zadani.replace("$c",str(c))
+    if c == 0:
+        zadani = zadani.replace("$c","")
+    
+    vysledek =str(k1)+","+str(k2)
+    
+    p2 = Priklad(zadani,vysledek)
+    
+    return p2
 
 def vytvor_test(format):
     test = []
     for i in range(format[0]):
-        test.append(vytvor_priklad(1))
+        test.append(vytvor_typ1())
     for i in range(format[1]):
-        test.append(vytvor_priklad(2))
+        test.append(vytvor_typ2())
     return test
 
 def spust_test(test):
@@ -114,7 +110,7 @@ def spust_test(test):
     return body
 def oznamkuj(body,testik,zak):
     max_body = len(testik)
-    procenta = (body/max_body)*100
+    procenta = int((body/max_body)*100)
     if procenta >=85:
         znamka = 1
     if procenta < 85 and procenta >= 70:
