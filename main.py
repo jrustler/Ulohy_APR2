@@ -5,13 +5,13 @@ from databaze import Databaze
 from priklad import Priklad
 from zak import Zak
 
-databaze = Databaze("priklady1.txt")
-format = [1,2]
+
+
 
 def co_dal(zak):
     co = input("Znovu?:1/konec?:2/me znamky:3")
     if co == str(1) :
-        main(format)
+        main()
     if co == str(2) :
         print("sbohem")
         sys.exit(2)
@@ -22,24 +22,37 @@ def co_dal(zak):
     if co != str(1) and co != str(2) and co != str(3):
         co_dal(zak)
     
+def co_dal_u(soubor):
+    co = input("zaci s vysledky:1/konec:2/vymazat data zaku:3/restart:4")
+    if co == str(1):
+        # dodelam
+        co_dal_u(soubor)
+    if co == str(2):
+        print("sbohem")
+        sys.exit(2)
+    if co == str(3):
+        reset_zaci(soubor)
+        co_dal_u(soubor)
+    if co == str(4):
+        main()
 
-def handler():
+def handler(soubor):
     udaje=[0,0,"0"]
-    zaci = pd.read_excel("zaci.xlsx")
+    zaci = pd.read_excel(soubor)
     st = input("Zadejte sve st:")
     if st not in zaci.columns:
         udaje[0]=input("zadej sve jmeno:")
         udaje[1]=input("zadej sve prijmeni:")
         zaci[st] = udaje
-        zaci.to_excel("zaci.xlsx",index = False)
-    zak = Zak(st,"zaci.xlsx")
+        zaci.to_excel(soubor,index = False)
+    zak = Zak(st,soubor)
     return zak  
 
 def reset_zaci(soubor):
     d = pd.DataFrame([],[])
     d.to_excel(soubor, index = False)
 
-def vytvor_typ1():
+def vytvor_typ1(databaze):
     
     zadani = random.choice(databaze.typ1)
     cisla = []
@@ -67,7 +80,7 @@ def vytvor_typ1():
     vysledek = eval(pocty)
     p1 = Priklad(zadani,vysledek)
     return p1
-def vytvor_typ2():
+def vytvor_typ2(databaze):
     zadani = random.choice(databaze.typ2)
     a = random.randint(1,10)
     k1 = random.randint(-10,10)
@@ -97,12 +110,12 @@ def vytvor_typ2():
     
     return p2
 
-def vytvor_test(format):
+def vytvor_test(format,databaze):
     test = []
     for i in range(format[0]):
-        test.append(vytvor_typ1())
+        test.append(vytvor_typ1(databaze))
     for i in range(format[1]):
-        test.append(vytvor_typ2())
+        test.append(vytvor_typ2(databaze))
     return test
 
 def spust_test(test):
@@ -128,15 +141,25 @@ def oznamkuj(body,testik,zak):
     zak.pridej_znamku(znamka)
     print(f"Test jsi splnil na {procenta} procent a dostal jsi {znamka}")
     return zak
-def main(format):
+def main():
     #reset_zaci("zaci.xlsx")
-    zak = handler()
-    testik = vytvor_test(format)
-    zak = oznamkuj(spust_test(testik),testik,zak)
-    co_dal(zak)
+    data = input("nazev souboru s predlohami prikladu")
+    soubor = input("kam ukladat data o zacich? (xlsx)")
+    jak = input("kolik prikladu jakeho typu? typ1,typ2")
+    format = [int(i) for i in jak.split(",")]
+    databaze = Databaze(data)
+    kdo = input("Jsi ucitel nebo zak? (u/z)")
+    if kdo == "z":
+        zak = handler(soubor)
+        testik = vytvor_test(format,databaze)
+        zak = oznamkuj(spust_test(testik),testik,zak)
+        co_dal(zak)
+    if kdo == "u":
+        co_dal_u(soubor)
+
     
 if __name__ == "__main__":
-    main(format)
+    main()
 
 #reset_zaci("zaci.xlsx")
 #testik = vytvor_test(format)

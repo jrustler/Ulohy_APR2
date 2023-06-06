@@ -1,3 +1,4 @@
+format -1,1
 1-kolik je $c $o $c?
 2-$ax**2 $bx $c = 0 , vysledek zadej ve tvaru k1,k2 , kde k1>=k2
 3-zderivujte $f
