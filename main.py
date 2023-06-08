@@ -166,7 +166,11 @@ def oznamkuj(body,testik,zak):
     if procenta <40:
         znamka = 5
     zak.pridej_znamku(znamka)
+    spravne_vysledky = []
+    for i in range(len(testik)):
+        spravne_vysledky.append(testik[i].vysledek)
     print(f"Test jsi splnil na {procenta} procent a dostal jsi {znamka}")
+    print(f"správné výsledky byly: {spravne_vysledky}")
     return zak
 def main():
     #reset_zaci("zaci.xlsx")
