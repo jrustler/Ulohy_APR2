@@ -107,7 +107,6 @@ def vytvor_typ2(databaze):
         vysledek =str(k1)+","+str(k2)
     else:
         vysledek =str(k2)+","+str(k1)
-    print(vysledek)
     p2 = Priklad(zadani,vysledek)
     
     return p2
@@ -168,15 +167,19 @@ def oznamkuj(body,testik,zak):
     zak.pridej_znamku(znamka)
     spravne_vysledky =""
     for p in testik:
-        spravne_vysledky+=(str(p.zneni)+": "+str(p.vysledek)+"\n")
+        spravne_vysledky+=(" "+str(p.zneni)+": "+str(p.vysledek)+"\n")
     print(f"Test jsi splnil na {procenta} procent a dostal jsi {znamka}")
     print(f"správné výsledky byly:\n{spravne_vysledky}")
     return zak
 def main():
     #reset_zaci("zaci.xlsx")
-    data = input("nazev souboru s predlohami prikladu")
-    soubor = input("kam ukladat data o zacich? (xlsx)")
+    data = input("nazev souboru s predlohami prikladu (pro prednastaveny soubor (priklady1.txt : 1))")
+    soubor = input("kam ukladat data o zacich? (xlsx) (pro prednastaveny soubor (zaci.xlsx): 1)")
     jak = input("kolik prikladu jakeho typu? typ1,typ2,typ3")
+    if data == "1":
+        data = "priklady1.txt"
+    if soubor == "1":
+        soubor = "zaci.xlsx"
     format = [int(i) for i in jak.split(",")]
     databaze = Databaze(data)
     kdo = input("Jsi ucitel nebo zak? (u/z)")
