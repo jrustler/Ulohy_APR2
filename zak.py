@@ -5,7 +5,7 @@ class Zak:
     def __init__(self,st,soubor):
         self._st = st
         self._soubor = soubor
-        self._df = pd.read_excel(soubor)
+        self._df = pd.read_excel(soubor,dtype = str)
      
     @property 
     def st(self):

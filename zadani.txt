@@ -1,3 +1,4 @@
-1. kolik je 53 * 42?
-2. 2x**2 -12x -80 = 0 , vysledek zadej ve tvaru k1,k2 , kde k1>=k2
-3. Pepik bydli 3 km od skoly, kolik cm je to na mape v meritku 1:30000 ?
+1. kolik je 4 - 28?
+2. vypoctete kvadratickou rovnici, jejiz kvadraticky clen je 4 , linearni clen je -16 a absolutni clen je -128 (vysledek napiste ve tvaru k1,k2, kde k1>=k2)
+3. Turisticky klub si naplanoval cestu, ktera na mape v meritku 1:80000 merila 8 cm, kolik m merila ve skutecnosti?
+4. Turisticky klub si naplanoval cestu, ktera na mape v meritku 1:50000 merila 5 cm, kolik km merila ve skutecnosti?

@@ -6,7 +6,7 @@ from priklad import Priklad
 from zak import Zak
 
 def vysledky_zaku(soubor):
-    df = pd.read_excel(soubor)
+    df = pd.read_excel(soubor,dtype = str)
     for c in df:
         print(df[c][0]+" "+df[c][1]+" : "+df[c][2])
 
@@ -41,7 +41,7 @@ def co_dal_u(soubor,databaze,format):
         vytvor_test_txt(vytvor_test(format,databaze))
         co_dal_u(soubor,databaze,format) 
 
-def handler(soubor):
+def jaky_zak(soubor):
     udaje=[0,0,"0"]
     zaci = pd.read_excel(soubor)
     st = input("Zadejte sve st:")
@@ -201,7 +201,7 @@ def main():
     databaze = Databaze(data)
     kdo = input("Jsi ucitel nebo zak? (u/z)")
     if kdo == "z":
-        zak = handler(soubor)
+        zak = jaky_zak(soubor)
         testik = vytvor_test(format,databaze)
         zak = oznamkuj(spust_test(testik),testik,zak)
         co_dal(zak)
