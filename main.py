@@ -14,32 +14,38 @@ def co_dal(zak):
     co = input("Znovu?:1/konec?:2/me znamky:3")
     if co == str(1) :
         main()
-    if co == str(2) :
+    elif co == str(2) :
         print("sbohem")
         sys.exit(2)
-    if co == str(3):
+    elif co == str(3):
         zak.vypis_znamky()
         zak.vypis_prumer()
         co_dal(zak)
-    if co != str(1) and co != str(2) and co != str(3):
+    else:
         co_dal(zak)
     
 def co_dal_u(soubor,databaze,format):
-    co = input("zaci s vysledky:1/konec:2/vymazat data zaku:3/restart:4/vytvor test do txt:5")
+    co = input("zaci s vysledky:1/konec:2/vymazat data zaku:3/restart:4/vytvor test do txt:5/reset statistik:6")
     if co == str(1):
         vysledky_zaku(soubor)
         co_dal_u(soubor,databaze,format)
-    if co == str(2):
+    elif co == str(2):
         print("sbohem")
         sys.exit(2)
-    if co == str(3):
+    elif co == str(3):
         reset_zaci(soubor)
         co_dal_u(soubor,databaze,format)
-    if co == str(4):
+    elif co == str(4):
         main()
-    if co == str(5):
+    elif co == str(5):
         vytvor_test_txt(vytvor_test(format,databaze))
-        co_dal_u(soubor,databaze,format) 
+        co_dal_u(soubor,databaze,format)
+    elif co == str(6):
+        s = open("statistika_uloh.txt","w")
+        s.write("typ1 = 0/0\ntyp2 = 0/0\ntyp3 = 0/0")
+        co_dal_u(soubor,databaze,format)
+    else:
+        co_dal_u(soubor,databaze,format)
 
 def jaky_zak(soubor):
     udaje=[0,0,"0"]
@@ -60,7 +66,7 @@ def reset_zaci(soubor):
 
 
 def vytvor_typ1(databaze):
-    
+    typ = "typ1"
     zadani = random.choice(databaze.typ1)
     cisla = []
     operatory = []
@@ -85,9 +91,10 @@ def vytvor_typ1(databaze):
             pocty+=operatory[0]
         
     vysledek = eval(pocty)
-    p1 = Priklad(zadani,vysledek)
+    p1 = Priklad(zadani,vysledek,typ)
     return p1
 def vytvor_typ2(databaze):
+    typ = "typ2"
     zadani = random.choice(databaze.typ2)
     a = random.randint(1,10)
     k1 = random.randint(-10,10)
@@ -112,10 +119,11 @@ def vytvor_typ2(databaze):
         vysledek =str(k1)+","+str(k2)
     else:
         vysledek =str(k2)+","+str(k1)
-    p2 = Priklad(zadani,vysledek)
+    p2 = Priklad(zadani,vysledek,typ)
     
     return p2
 def vytvor_typ3(databaze):
+    typ = "typ3"
     zadani = random.choice(databaze.typ3)
     m = random.choice([30000,10000,4000,5000,50000,60000,80000])
     cm = random.randint(1,9)
@@ -134,7 +142,7 @@ def vytvor_typ3(databaze):
     else:
         zadani = zadani.replace("$km",str(km))
         vysledek = str(round((km/m)*100000,1)).replace(".0","")
-    p3 = Priklad(zadani,vysledek)
+    p3 = Priklad(zadani,vysledek,typ)
     return p3
 
 
@@ -189,7 +197,6 @@ def vytvor_test_txt(test,txt_zadani = "zadani.txt",txt_reseni = "reseni.txt"):
 
 
 def main():
-    #reset_zaci("zaci.xlsx")
     data = input("nazev souboru s predlohami prikladu (pro prednastaveny soubor (priklady1.txt : 1))")
     soubor = input("kam ukladat data o zacich? (xlsx) (pro prednastaveny soubor (zaci.xlsx): 1)")
     jak = input("kolik prikladu jakeho typu? typ1,typ2,typ3")
