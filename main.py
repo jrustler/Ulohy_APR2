@@ -38,7 +38,8 @@ def co_dal_u(soubor,databaze,format):
     if co == str(4):
         main()
     if co == str(5):
-        vytvor_test_txt(vytvor_test(format,databaze)) 
+        vytvor_test_txt(vytvor_test(format,databaze))
+        co_dal_u(soubor,databaze,format) 
 
 def handler(soubor):
     udaje=[0,0,"0"]
@@ -55,6 +56,8 @@ def handler(soubor):
 def reset_zaci(soubor):
     d = pd.DataFrame([],[])
     d.to_excel(soubor, index = False)
+
+
 
 def vytvor_typ1(databaze):
     
