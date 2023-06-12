@@ -44,7 +44,7 @@ class Priklad:
         self._typ = value
 
     def vypis_a_zkontroluj(self):
-        odpoved=input(self.zneni)
+        odpoved=input(self.zneni + " \nzadej vysledek: ")
         s = open("statistika_uloh.txt","rt")
         data = s.read()
         if odpoved == str(self.vysledek):
