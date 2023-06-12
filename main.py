@@ -24,19 +24,21 @@ def co_dal(zak):
     if co != str(1) and co != str(2) and co != str(3):
         co_dal(zak)
     
-def co_dal_u(soubor):
-    co = input("zaci s vysledky:1/konec:2/vymazat data zaku:3/restart:4")
+def co_dal_u(soubor,databaze,format):
+    co = input("zaci s vysledky:1/konec:2/vymazat data zaku:3/restart:4/vytvor test do txt:5")
     if co == str(1):
         vysledky_zaku(soubor)
-        co_dal_u(soubor)
+        co_dal_u(soubor,databaze,format)
     if co == str(2):
         print("sbohem")
         sys.exit(2)
     if co == str(3):
         reset_zaci(soubor)
-        co_dal_u(soubor)
+        co_dal_u(soubor,databaze,format)
     if co == str(4):
         main()
+    if co == str(5):
+        vytvor_test_txt(vytvor_test(format,databaze)) 
 
 def handler(soubor):
     udaje=[0,0,"0"]
@@ -171,6 +173,18 @@ def oznamkuj(body,testik,zak):
     print(f"Test jsi splnil na {procenta} procent a dostal jsi {znamka}")
     print(f"správné výsledky byly:\n{spravne_vysledky}")
     return zak
+
+def vytvor_test_txt(test,txt_zadani = "zadani.txt",txt_reseni = "reseni.txt"):
+    z = open(txt_zadani,"w")
+    r = open(txt_reseni,"w")
+    for k,p in enumerate(test):
+        z.write(str(k+1)+". "+p.zneni+"\n")
+        r.write(str(k+1)+". "+str(p.vysledek)+"\n")
+    z.close()
+    r.close()
+
+
+
 def main():
     #reset_zaci("zaci.xlsx")
     data = input("nazev souboru s predlohami prikladu (pro prednastaveny soubor (priklady1.txt : 1))")
@@ -189,7 +203,7 @@ def main():
         zak = oznamkuj(spust_test(testik),testik,zak)
         co_dal(zak)
     if kdo == "u":
-        co_dal_u(soubor)
+        co_dal_u(soubor,databaze,format)
 
     
 if __name__ == "__main__":
