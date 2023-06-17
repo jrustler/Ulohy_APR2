@@ -1,4 +1,3 @@
-1. kolik je 4 - 28?
-2. vypoctete kvadratickou rovnici, jejiz kvadraticky clen je 4 , linearni clen je -16 a absolutni clen je -128 (vysledek napiste ve tvaru k1,k2, kde k1>=k2)
-3. Turisticky klub si naplanoval cestu, ktera na mape v meritku 1:80000 merila 8 cm, kolik m merila ve skutecnosti?
-4. Turisticky klub si naplanoval cestu, ktera na mape v meritku 1:50000 merila 5 cm, kolik km merila ve skutecnosti?
+1. kolik je 92 * 60?
+2. vypoctete kvadratickou rovnici, jejiz kvadraticky clen je 10 , linearni clen je +170 a absolutni clen je +720 (vysledek napiste ve tvaru k1,k2, kde k1>=k2)
+3. Zavodnici pojedou zavod dlouhy 4 km, kolik cm bude mit trasa zavodu na mape v meriku 1:10000?

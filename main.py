@@ -39,7 +39,9 @@ def co_dal_u(soubor,databaze,format):
     elif co == str(4):
         main()
     elif co == str(5):
-        vytvor_test_txt(vytvor_test(format,databaze))
+        test = Test(format,databaze)
+        vytvor_test(test)
+        vytvor_test_txt(test)
         co_dal_u(soubor,databaze,format)
     elif co == str(6):
         s = open("statistika_uloh.txt","w")
@@ -146,7 +148,7 @@ def vytvor_typ3(databaze):
     p3 = Priklad(zadani,vysledek,typ)
     return p3
 
-def vytvor_test2(testik):
+def vytvor_test(testik):
     for i in range(testik.format[0]):
         testik.pridej_priklad(vytvor_typ1(testik.databaze))
     for i in range(testik.format[1]):
@@ -178,7 +180,7 @@ def oznamkuj(body,testik,zak):
 def vytvor_test_txt(test,txt_zadani = "zadani.txt",txt_reseni = "reseni.txt"):
     z = open(txt_zadani,"w")
     r = open(txt_reseni,"w")
-    for k,p in enumerate(test):
+    for k,p in enumerate(test.priklady):
         z.write(str(k+1)+". "+p.zneni+"\n")
         r.write(str(k+1)+". "+str(p.vysledek)+"\n")
     z.close()
@@ -200,7 +202,7 @@ def main():
     if kdo == "z":
         zak = jaky_zak(soubor)
         testik = Test(format,databaze)
-        vytvor_test2(testik)
+        vytvor_test(testik)
         zak = oznamkuj(testik.spust_test(),testik,zak)
         co_dal(zak)
     if kdo == "u":
