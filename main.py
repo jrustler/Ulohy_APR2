@@ -4,6 +4,7 @@ import pandas as pd
 from databaze import Databaze
 from priklad import Priklad
 from zak import Zak
+from Test import Test
 
 def vysledky_zaku(soubor):
     df = pd.read_excel(soubor,dtype = str)
@@ -145,27 +146,16 @@ def vytvor_typ3(databaze):
     p3 = Priklad(zadani,vysledek,typ)
     return p3
 
+def vytvor_test2(testik):
+    for i in range(testik.format[0]):
+        testik.pridej_priklad(vytvor_typ1(testik.databaze))
+    for i in range(testik.format[1]):
+        testik.pridej_priklad(vytvor_typ2(testik.databaze))
+    for i in range(testik.format[2]):
+        testik.pridej_priklad(vytvor_typ3(testik.databaze))
 
-
-def vytvor_test(format,databaze):
-    test = []
-    for i in range(format[0]):
-        test.append(vytvor_typ1(databaze))
-    for i in range(format[1]):
-        test.append(vytvor_typ2(databaze))
-    for i in range(format[2]):
-        test.append(vytvor_typ3(databaze))
-    return test
-
-def spust_test(test):
-    body = 0
-    for p in test:
-        p.vypis_a_zkontroluj()
-        if p.uspesnost == "správně":
-            body+=1
-    return body
 def oznamkuj(body,testik,zak):
-    max_body = len(testik)
+    max_body = len(testik.priklady)
     procenta = int((body/max_body)*100)
     if procenta >=85:
         znamka = 1
@@ -179,7 +169,7 @@ def oznamkuj(body,testik,zak):
         znamka = 5
     zak.pridej_znamku(znamka)
     spravne_vysledky =""
-    for p in testik:
+    for p in testik.priklady:
         spravne_vysledky+=(" "+str(p.zneni)+": "+str(p.vysledek)+"\n")
     print(f"Test jsi splnil na {procenta} procent a dostal jsi {znamka}")
     print(f"správné výsledky byly:\n{spravne_vysledky}")
@@ -209,8 +199,9 @@ def main():
     kdo = input("Jsi ucitel nebo zak? (u/z)")
     if kdo == "z":
         zak = jaky_zak(soubor)
-        testik = vytvor_test(format,databaze)
-        zak = oznamkuj(spust_test(testik),testik,zak)
+        testik = Test(format,databaze)
+        vytvor_test2(testik)
+        zak = oznamkuj(testik.spust_test(),testik,zak)
         co_dal(zak)
     if kdo == "u":
         co_dal_u(soubor,databaze,format)
