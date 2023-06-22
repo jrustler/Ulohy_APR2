@@ -36,22 +36,22 @@ class Zak:
         self._df = value
     
     def vypis_jmeno(self):
-        print(self.df[self.st][0])
+        print(self._df[self._st][0])
     
     def vypis_prijmeni(self):
-        print(self.df[self.st][1])
+        print(self._df[self._st][1])
     
     def vypis_znamky(self):
-        print(f"tve znamky jsou: {self.df[self.st][2]}")
+        print(f"tve znamky jsou: {self._df[self._st][2]}")
     
     def vypis_prumer(self):
-        seznam =[int(i) for i in self.df[self.st][2].split(", ")]
+        seznam =[int(i) for i in self.df[self._st][2].split(", ")]
         prumer = sum(seznam)/len(seznam)
         print(f"tvůj průměr je {prumer}")
 
     def pridej_znamku(self,znamka):
-        if self.df[self.st][2]=="0":
-            self.df[self.st][2] = str(znamka)
+        if self._df[self._st][2]=="0":
+            self_.df[self._st][2] = str(znamka)
         else:
-            self.df[self.st][2]+=", "+str(znamka)
-        self.df.to_excel(self.soubor,index = False)
+            self._df[self._st][2]+=", "+str(znamka)
+        self._df.to_excel(self._soubor,index = False)
