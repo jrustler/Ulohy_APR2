@@ -51,7 +51,7 @@ class Zak:
 
     def pridej_znamku(self,znamka):
         if self._df[self._st][2]=="0":
-            self_.df[self._st][2] = str(znamka)
+            self._df[self._st][2] = str(znamka)
         else:
             self._df[self._st][2]+=", "+str(znamka)
         self._df.to_excel(self._soubor,index = False)

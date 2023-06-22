@@ -44,28 +44,29 @@ class Priklad:
         self._typ = value
 
     def vypis_a_zkontroluj(self):
-        odpoved=input(self.zneni + " \nzadej vysledek: ")
+        odpoved=input(self._zneni + " \nzadej vysledek: ")
         s = open("statistika_uloh.txt","rt")
         data = s.read()
-        if odpoved == str(self.vysledek):
-            self.uspesnost = "správně"
-            if self.typ == "typ1":
-                    data = data.replace(data[7:10],str(int(data[7])+1)+"/"+str(int(data[9])+1))
-            if self.typ == "typ2":
-                    data = data.replace(data[18:21],str(int(data[18])+1)+"/"+str(int(data[20])+1))
-            if self.typ == "typ3":
-                    data = data.replace(data[29:32],str(int(data[29])+1)+"/"+str(int(data[31])+1))
-            
+        if odpoved == str(self._vysledek):
+            self._uspesnost = "správně"
+            if self._typ == "typ1":
+                    data = data.replace(data[7:10],str(int(data[7])+1)+"/"+str(int(data[9])+1),1)
+            if self._typ == "typ2":
+                    data = data.replace(data[18:21],str(int(data[18])+1)+"/"+str(int(data[20])+1),1)
+            if self._typ == "typ3":
+                    data = data.replace(data[29:32],str(int(data[29])+1)+"/"+str(int(data[31])+1),1)
+
         else:
-            self.uspesnost = "špatně"
-            if self.typ == "typ1":
-                    data = data.replace(data[7:10],str(int(data[7]))+"/"+str(int(data[9])+1))
-            if self.typ == "typ2":
-                    data = data.replace(data[18:21],str(int(data[18]))+"/"+str(int(data[20])+1))
-            if self.typ == "typ3":
-                    data = data.replace(data[29:32],str(int(data[29]))+"/"+str(int(data[31])+1))
+            self._uspesnost = "špatně"
+            if self._typ == "typ1":
+                    data = data.replace(data[7:10],str(int(data[7]))+"/"+str(int(data[9])+1),1)
+            if self._typ == "typ2":
+                    data = data.replace(data[18:21],str(int(data[18]))+"/"+str(int(data[20])+1),1)
+            if self._typ == "typ3":
+                    data = data.replace(data[29:32],str(int(data[29]))+"/"+str(int(data[31])+1),1)
+        
         s.close()
         s = open("statistika_uloh.txt","wt")
         s.write(data)
         s.close()
-        print(self.uspesnost)
+        print(self._uspesnost)

@@ -8,8 +8,11 @@ from Test import Test
 
 def vysledky_zaku(soubor):
     df = pd.read_excel(soubor,dtype = str)
-    for c in df:
-        print(df[c][0]+" "+df[c][1]+" : "+df[c][2])
+    if len(df) !=0:
+        for c in df:
+            print(df[c][0]+" "+df[c][1]+" : "+df[c][2])
+    else:
+        print("zatim zadna data o zacich")
 
 def co_dal(zak):
     co = input("Znovu?:1/konec?:2/me znamky:3")
@@ -26,7 +29,7 @@ def co_dal(zak):
         co_dal(zak)
     
 def co_dal_u(soubor,databaze,format):
-    co = input("zaci s vysledky:1/konec:2/vymazat data zaku:3/restart:4/vytvor test do txt:5/reset statistik:6")
+    co = input("zaci s vysledky:1/konec:2/vymazat data zaku:3/restart:4/vytvor test do txt:5/reset statistik:6/vypis statistik:7")
     if co == str(1):
         vysledky_zaku(soubor)
         co_dal_u(soubor,databaze,format)
@@ -46,6 +49,10 @@ def co_dal_u(soubor,databaze,format):
     elif co == str(6):
         s = open("statistika_uloh.txt","w")
         s.write("typ1 = 0/0\ntyp2 = 0/0\ntyp3 = 0/0")
+        s.close()
+        co_dal_u(soubor,databaze,format)
+    elif co == str(7):
+        vypis_statistiky()
         co_dal_u(soubor,databaze,format)
     else:
         co_dal_u(soubor,databaze,format)
@@ -65,8 +72,6 @@ def jaky_zak(soubor):
 def reset_zaci(soubor):
     d = pd.DataFrame([],[])
     d.to_excel(soubor, index = False)
-
-
 
 def vytvor_typ1(databaze):
     typ = "typ1"
@@ -96,6 +101,7 @@ def vytvor_typ1(databaze):
     vysledek = eval(pocty)
     p1 = Priklad(zadani,vysledek,typ)
     return p1
+
 def vytvor_typ2(databaze):
     typ = "typ2"
     zadani = random.choice(databaze.typ2)
@@ -123,8 +129,8 @@ def vytvor_typ2(databaze):
     else:
         vysledek =str(k2)+","+str(k1)
     p2 = Priklad(zadani,vysledek,typ)
-    
     return p2
+
 def vytvor_typ3(databaze):
     typ = "typ3"
     zadani = random.choice(databaze.typ3)
@@ -186,7 +192,11 @@ def vytvor_test_txt(test,txt_zadani = "zadani.txt",txt_reseni = "reseni.txt"):
     z.close()
     r.close()
 
-
+def vypis_statistiky():
+    s = open("statistika_uloh.txt","r")
+    for l in s:
+        print(l)
+    s.close()
 
 def main():
     data = input("nazev souboru s predlohami prikladu (pro prednastaveny soubor (priklady1.txt : 1))")

@@ -1,3 +1,3 @@
-1. kolik je 92 * 60?
-2. vypoctete kvadratickou rovnici, jejiz kvadraticky clen je 10 , linearni clen je +170 a absolutni clen je +720 (vysledek napiste ve tvaru k1,k2, kde k1>=k2)
-3. Zavodnici pojedou zavod dlouhy 4 km, kolik cm bude mit trasa zavodu na mape v meriku 1:10000?
+1. kolik je 6 + 88?
+2. vypoctete kvadratickou rovnici, jejiz kvadraticky clen je 2 , linearni clen je +34 a absolutni clen je +140 (vysledek napiste ve tvaru k1,k2, kde k1>=k2)
+3. Turisticky klub si naplanoval cestu, ktera na mape v meritku 1:30000 merila 5 cm, kolik cm merila ve skutecnosti?
