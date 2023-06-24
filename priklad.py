@@ -44,29 +44,17 @@ class Priklad:
         self._typ = value
 
     def vypis_a_zkontroluj(self):
-        odpoved=input(self._zneni + " \nzadej vysledek: ")
+        self._uspesnost = "správně" if input(self._zneni + " \nzadej vysledek: ") == str(self._vysledek) else "špatně"
+        print(self._uspesnost)
+    
+    def zapis_do_statistik(self):
         s = open("statistika_uloh.txt","rt")
         data = s.read()
-        if odpoved == str(self._vysledek):
-            self._uspesnost = "správně"
-            if self._typ == "typ1":
-                    data = data.replace(data[7:10],str(int(data[7])+1)+"/"+str(int(data[9])+1),1)
-            if self._typ == "typ2":
-                    data = data.replace(data[18:21],str(int(data[18])+1)+"/"+str(int(data[20])+1),1)
-            if self._typ == "typ3":
-                    data = data.replace(data[29:32],str(int(data[29])+1)+"/"+str(int(data[31])+1),1)
-
-        else:
-            self._uspesnost = "špatně"
-            if self._typ == "typ1":
-                    data = data.replace(data[7:10],str(int(data[7]))+"/"+str(int(data[9])+1),1)
-            if self._typ == "typ2":
-                    data = data.replace(data[18:21],str(int(data[18]))+"/"+str(int(data[20])+1),1)
-            if self._typ == "typ3":
-                    data = data.replace(data[29:32],str(int(data[29]))+"/"+str(int(data[31])+1),1)
-        
+        typy = {"správně":{"typ1":[7,10,9,1],"typ2":[18,21,20,1],"typ3":[29,32,31,1]},"špatně":{"typ1":[7,10,9,0],"typ2":[18,21,20,0],"typ3":[29,32,31,0]}}
+        for o in typy.keys():
+            if o == self._uspesnost:
+                data = data.replace(data[typy[o][self._typ][0]:typy[o][self._typ][1]],str(int(data[typy[o][self._typ][0]])+int(typy[o][self._typ][3]))+"/"+str(int(data[typy[o][self._typ][2]])+1),1)
         s.close()
         s = open("statistika_uloh.txt","wt")
         s.write(data)
         s.close()
-        print(self._uspesnost)

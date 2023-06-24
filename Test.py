@@ -41,7 +41,9 @@ class Test:
         body = 0
         for p in self._priklady:
             p.vypis_a_zkontroluj()
+            p.zapis_do_statistik()
             if p.uspesnost == "správně":
                 body+=1
         return body
 
+    
