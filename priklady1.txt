@@ -1,4 +1,5 @@
 1-kolik je $c $o $c?
+1-Kolik jablicek je $c jablicek $o $c jablicek? 
 2-$ax**2 $bx $c = 0 , vysledek zadej ve tvaru k1,k2 , kde k1>=k2
 3-Turisticky klub si naplanoval cestu, ktera na mape v meritku 1:$m merila $cm cm, kolik $j merila ve skutecnosti?
 3-Pepik bydli $km km od skoly, kolik cm je to na mape v meritku 1:$m ?
@@ -7,3 +8,4 @@
 3-Zavodnici dostali mapu v meritku 1:$m s vyznacenou trasou. Trasa na mape merila $cm cm, kolik $j merila ve skutecnosti?
 1-Vypocti $c $o $c
 3-Zavodnici pojedou zavod dlouhy $km km, kolik cm bude mit trasa zavodu na mape v meriku 1:$m?
+4-vypocti $ax $b = $c

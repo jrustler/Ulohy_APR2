@@ -1,3 +1,5 @@
+import pandas as pd
+
 class Priklad:
 
     def __init__(self,zneni,vysledek,typ):
@@ -47,14 +49,16 @@ class Priklad:
         self._uspesnost = "správně" if input(self._zneni + " \nzadej vysledek: ") == str(self._vysledek) else "špatně"
         print(self._uspesnost)
     
+
     def zapis_do_statistik(self):
-        s = open("statistika_uloh.txt","rt")
-        data = s.read()
-        typy = {"správně":{"typ1":[7,10,9,1],"typ2":[18,21,20,1],"typ3":[29,32,31,1]},"špatně":{"typ1":[7,10,9,0],"typ2":[18,21,20,0],"typ3":[29,32,31,0]}}
-        for o in typy.keys():
-            if o == self._uspesnost:
-                data = data.replace(data[typy[o][self._typ][0]:typy[o][self._typ][1]],str(int(data[typy[o][self._typ][0]])+int(typy[o][self._typ][3]))+"/"+str(int(data[typy[o][self._typ][2]])+1),1)
-        s.close()
-        s = open("statistika_uloh.txt","wt")
-        s.write(data)
-        s.close()
+        statistika = pd.read_excel("statistika_uloh.xlsx",dtype = str)
+        if self._uspesnost == "správně":
+            statistika[self._typ][0] = int((statistika[self._typ][0]))+1
+            statistika[self._typ][1] = int(statistika[self._typ][1])+1
+        else:
+            statistika[self._typ][1] = int(statistika[self._typ][1])+1
+        statistika.to_excel("statistika_uloh.xlsx",index = False)
+
+
+
+
