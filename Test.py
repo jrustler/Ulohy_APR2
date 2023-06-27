@@ -85,26 +85,18 @@ class Test:
         zadani = random.choice(self._databaze.typ1)
         cisla = []
         operatory = []
-        kolik_cisel = zadani.count("$c")
-        kolik_operatoru = zadani.count("$o")
-        
-        for i in range(kolik_cisel):
+        kolikrat = zadani.count("$c")
+        pocty = ""
+        for i in range(kolikrat):
             c = random.randint(1,100)
             cisla.append(c)
             zadani = zadani.replace("$c",str(c),1)
-        
-        for i in range(kolik_operatoru):
-            o = random.choice(["+","-","*"])
-            operatory.append(o)
-            zadani = zadani.replace("$o",o,1)
-        pocty = ""
-        
-        for i in range(len(cisla)):
-            pocty+=str(cisla[i])
-            
-            if i <= (len(operatory)-1):
-                pocty+=operatory[0]
-        
+            pocty+= str(c)
+            if i <= kolikrat-2:
+                o = random.choice(["+","-","*"])
+                operatory.append(o)
+                zadani = zadani.replace("$o",o,1)
+                pocty += o
         vysledek = eval(pocty)
         p1 = Priklad(zadani,vysledek,typ)
         return p1

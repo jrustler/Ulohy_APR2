@@ -4,7 +4,7 @@ import pandas as pd
 from databaze import Databaze
 from priklad import Priklad
 from zak import Zak
-from Test import Test
+from test import Test
 from data_zaku import Data_zaku
 from statistika_u import Statistika_u
 
@@ -25,8 +25,7 @@ def ui(kdo,data_zaku,test,statistika_u,zak):
     print(menu[kdo])
     co = input(" Co dal?")
     ui_input[kdo][co]()
-    if co not in ["1","2"]:
-        ui(kdo,data_zaku,test,statistika_u,zak)
+    ui(kdo,data_zaku,test,statistika_u,zak)
 
 def main():
     data = input("nazev souboru s predlohami prikladu (pro prednastaveny soubor (priklady1.txt : 1))")
