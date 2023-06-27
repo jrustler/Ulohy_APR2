@@ -47,6 +47,7 @@ def main():
         zak = data_zaku.jaky_zak()
         test.vytvor_test()
         test.spust_test()
+        test.vypis_spravne()
         test.oznamkuj_se()
         zak.pridej_znamku(test.znamka)
     ui(kdo,data_zaku,test,statistika_u,zak)

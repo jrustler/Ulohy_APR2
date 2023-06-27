@@ -118,19 +118,14 @@ class Test:
         b = a*(-k1 + -k2)
         c = a*k1*k2
         zadani = zadani.replace("$a",str(a))
-        if b > 0:
-            zadani = zadani.replace("$b","+"+str(b))
-        if b < 0 :
-            zadani = zadani.replace("$b",str(b))
-        if b == 0:
-            zadani = zadani.replace("$bx"," ")
-        if c > 0:
-            zadani = zadani.replace("$c","+"+str(c))
-        if c < 0:
-            zadani = zadani.replace("$c",str(c))
-        if c == 0:
-            zadani = zadani.replace("$c","")
-    
+        zapis = {b:["$b","$bx"],c:["$c","$c"]}
+        for koef in zapis.keys():
+            if koef > 0:
+                zadani = zadani.replace(zapis[koef][0],"+"+str(koef))
+            if koef < 0:
+                zadani = zadani.replace(zapis[koef][0],str(koef))
+            if koef == 0:
+                zadani = zadani.replace(zapis[koef][1],"") 
         if k1>k2:
             vysledek =str(k1)+","+str(k2)
         else:
@@ -149,12 +144,10 @@ class Test:
         if zadani.count("$cm") != 0:
             zadani = zadani.replace("$cm",str(cm))
             zadani = zadani.replace("$j",str(j))
-            if j == "cm":
-                vysledek=str(round((cm*m),1)).replace(".0","")
-            if j == "m":
-                vysledek=str(round(cm*(m/100),1)).replace(".0","")
-            if j == "km":
-                vysledek = str(round(cm*(m/100000),1)).replace(".0","")
+            nuly = {"cm":1,"m":100,"km":100000}
+            for jed in nuly.keys():
+                if j == jed:
+                    vysledek=str(round((cm*(m/nuly[jed])),1)).replace(".0","")
         else:
             zadani = zadani.replace("$km",str(km))
             vysledek = str(round((km/m)*100000,1)).replace(".0","")
@@ -183,7 +176,7 @@ class Test:
     
     def vypis_spravne(self):
         spravne_vysledky =""
-        for p in self.priklady:
+        for p in self._priklady:
             spravne_vysledky+=(" "+str(p.zneni)+": "+str(p.vysledek)+"\n")
         print(f"správné výsledky byly:\n{spravne_vysledky}") 
     
