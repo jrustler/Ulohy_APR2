@@ -23,7 +23,7 @@ def ui(kdo,data_zaku,test,statistika_u,zak):
                     "6":statistika_u.reset_statistik,
                     "7":statistika_u.vypis_statistiky}}
     print(menu[kdo])
-    co = input(" Co dal?")
+    co = input(" Co dal? \n --------------------- ")
     ui_input[kdo][co]()
     ui(kdo,data_zaku,test,statistika_u,zak)
 
