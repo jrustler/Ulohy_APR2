@@ -6,7 +6,7 @@ class Test:
     def __init__(self,format,databaze,priklady=[]):
         self._format = format
         self._databaze = databaze
-        self._priklady = []
+        self._priklady = priklady
         self._body = 0
         self._znamka = 0
     
